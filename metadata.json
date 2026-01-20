@@ -1,0 +1,7 @@
+{
+  "name": "المختبر الذكي (Smart Lab)",
+  "description": "An advanced science laboratory educational application for students, providing interactive experiments, portals for different academic years, and smart AI-powered learning assistance.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
