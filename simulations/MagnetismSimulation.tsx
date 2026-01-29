@@ -6,8 +6,6 @@ export const MagnetismSimulation: React.FC = () => {
   const [rotY, setRotY] = useState(0); 
   const [rotX, setRotX] = useState(25);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isDragging = useRef(false);
-  const lastMousePos = useRef({ x: 0, y: 0 });
 
   const initialMaterials = useMemo(() => [
     { id: 'iron', name: 'حديد', factor: 1.0, icon: 'settings', startPos: 15, texture: 'bg-[radial-gradient(circle_at:30%_30%,#e2e8f0_0%,#1e293b_100%)] shadow-xl' },
@@ -96,8 +94,8 @@ export const MagnetismSimulation: React.FC = () => {
         <div className="absolute z-50 cursor-grab active:cursor-grabbing" style={{ left: `${magnetX}%`, top: '15%', transform: `translateX(-50%) translateZ(100px) rotateX(${rotX}deg) rotateY(${rotY}deg)`, transformStyle: 'preserve-3d' }}>
            <div className="relative w-48 h-16" style={{ transformStyle: 'preserve-3d' }}>
               <div className="absolute inset-0 flex border border-white/20 rounded-xl overflow-hidden shadow-2xl" style={{ backfaceVisibility: 'hidden' }}>
-                 <div className="w-1/2 h-full bg-red-600 flex items-center justify-center font-black text-white text-3xl">N</div>
-                 <div className="w-1/2 h-full bg-slate-400 flex items-center justify-center font-black text-slate-900 text-3xl">S</div>
+                 <div className="w-1/2 h-full bg-red-600 flex items-center justify-center font-black text-white text-3xl">ش</div>
+                 <div className="w-1/2 h-full bg-slate-400 flex items-center justify-center font-black text-slate-900 text-3xl">ج</div>
               </div>
            </div>
         </div>
@@ -115,7 +113,7 @@ export const MagnetismSimulation: React.FC = () => {
       <div className="absolute bottom-0 w-full p-6 pb-12 z-[100] bg-gradient-to-t from-black via-black/40 to-transparent">
          <div className="max-w-[320px] mx-auto bg-white/5 backdrop-blur-3xl p-6 rounded-[2.5rem] border border-white/10 shadow-2xl">
             <input type="range" min="5" max="95" value={magnetX} onChange={(e) => setMagnetX(parseInt(e.target.value))} className="w-full h-1.5 bg-slate-800 rounded-full appearance-none accent-primary cursor-pointer mb-3"/>
-            <button onClick={() => setItemPositions(initialMaterials.map(m => m.startPos))} className="w-full py-2 bg-primary/20 hover:bg-primary/30 text-primary px-3 py-1.5 rounded-full transition-all active:scale-95 border border-primary/30 text-xs font-bold uppercase">إعادة ترتيب المواد</button>
+            <button onClick={() => setItemPositions(initialMaterials.map(m => m.startPos))} className="w-full py-2 bg-primary/20 hover:bg-primary/30 text-primary px-3 py-1.5 rounded-full transition-all active:scale-95 border border-primary/30 text-xs font-bold uppercase tracking-tight">إعادة ترتيب المواد</button>
          </div>
       </div>
     </div>

@@ -154,31 +154,38 @@ export const MatterSimulation: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-8 w-full max-w-[320px] bg-black/80 backdrop-blur-3xl p-6 rounded-[2.5rem] border border-white/10 shadow-2xl space-y-4 mb-4">
-          <div className="flex justify-between items-center px-2">
+      {/* Temperature Control Panel - Moved higher and made more compact */}
+      <div className="relative mt-[-40px] z-30 w-full max-w-[280px] bg-slate-900/90 backdrop-blur-3xl p-4 rounded-[2rem] border border-white/10 shadow-2xl space-y-3 mb-4">
+          <div className="flex justify-between items-center px-1">
              <div className="text-right">
-                <span className="text-[10px] font-black text-primary uppercase block tracking-widest mb-1">الحرارة</span>
-                <span className={`text-2xl font-black transition-colors ${temperature >= 100 ? 'text-red-500 animate-pulse' : temperature <= 0 ? 'text-cyan-400' : 'text-white'}`}>
-                  {temperature}°C
-                </span>
+                <span className="text-[9px] font-black text-primary uppercase block tracking-widest mb-0.5 opacity-70">الحرارة</span>
+                <div className="flex items-baseline gap-0.5">
+                  <span className={`text-xl font-black transition-colors ${temperature >= 100 ? 'text-red-500 animate-pulse' : temperature <= 0 ? 'text-cyan-400' : 'text-white'}`}>
+                    {temperature}
+                  </span>
+                  <span className="text-[10px] text-slate-500">°C</span>
+                </div>
              </div>
              <div className="text-left">
-                <span className="text-[10px] font-black text-blue-400 uppercase block tracking-widest mb-1">الحالة</span>
-                <span className="text-lg font-black text-white">
-                  {temperature <= 0 ? 'جليد صلب' : temperature >= 100 ? 'غليان وبخار' : 'سائل'}
+                <span className="text-[9px] font-black text-blue-400 uppercase block tracking-widest mb-0.5 opacity-70">الحالة</span>
+                <span className="text-xs font-black text-white">
+                  {temperature <= 0 ? 'جليد صلب' : temperature >= 100 ? 'غليان' : 'سائل'}
                 </span>
              </div>
           </div>
-          <div className="relative px-2 py-4">
+          <div className="px-1">
             <input 
               type="range" 
               min="-20" 
               max="150" 
               value={temperature} 
               onChange={(e) => setTemperature(parseInt(e.target.value))} 
-              className="w-full h-2 accent-primary cursor-pointer appearance-none bg-slate-800 rounded-full" 
+              className="w-full h-1.5 accent-primary cursor-pointer appearance-none bg-slate-800 rounded-full" 
             />
           </div>
+          <p className="text-[9px] font-bold text-slate-400 text-center leading-tight px-2">
+            اسحب لتغيير درجة الحرارة وملاحظة تغير حركة الجزيئات.
+          </p>
       </div>
     </div>
   );

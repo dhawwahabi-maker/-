@@ -27,7 +27,7 @@ export const SoundVibrationSimulation: React.FC = () => {
           <div className="flex gap-2">
             {[...Array(10)].map((_, i) => <div key={i} className="w-0.5 h-3 bg-white/30" />)}
           </div>
-          <span className="text-[10px] font-black text-white/50 tracking-tighter">SMART LAB RULER</span>
+          <span className="text-[10px] font-black text-white/70 tracking-tighter">مسطرة المختبر الذكي</span>
         </div>
 
         {/* Sound Waves Animation */}

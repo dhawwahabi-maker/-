@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,49 +12,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script>
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
             colors: {
-              "primary": "#135bec",
-              "background-light": "#f6f6f8",
-              "background-dark": "#101622",
-              "surface-dark": "#1c2533",
-              "surface-light": "#ffffff",
+              "primary": "#4f46e5", // Indigo 600
+              "primary-light": "#818cf8", 
+              "primary-dark": "#3730a3", 
+              "secondary": "#0ea5e9", // Sky Blue
+              "accent": "#f43f5e", 
+              "background": "#f0f4ff", // Soft Blue-White
+              "surface": "#ffffff",
+              "card-bg": "rgba(255, 255, 255, 0.8)",
             },
             fontFamily: {
               "display": ["Space Grotesk", "Lexend", "Noto Sans Arabic", "sans-serif"],
               "body": ["Space Grotesk", "Noto Sans Arabic", "Lexend", "sans-serif"],
             },
             borderRadius: {
-              "DEFAULT": "0.5rem",
-              "lg": "0.75rem",
-              "xl": "1rem",
-              "2xl": "1.5rem",
-              "full": "9999px"
+              "3xl": "1.5rem",
+              "4xl": "2.5rem",
             },
             animation: {
-              'slide-up-fade': 'slideUpFade 0.5s ease-out forwards',
-              'pulse-subtle': 'pulseSubtle 2s infinite ease-in-out',
-              'float': 'float 4s infinite ease-in-out',
-              'heat-pulse': 'heatPulse 2s infinite ease-in-out',
+              'slide-up-fade': 'slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'pulse-subtle': 'pulseSubtle 3s infinite ease-in-out',
+              'float': 'float 5s infinite ease-in-out',
+              'glow': 'glow 2s infinite ease-in-out',
             },
             keyframes: {
               slideUpFade: {
-                '0%': { opacity: '0', transform: 'translateY(15px)' },
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
               },
               pulseSubtle: {
-                '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-                '50%': { transform: 'scale(1.02)', opacity: '0.98' },
+                '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                '50%': { opacity: '0.9', transform: 'scale(1.01)' },
               },
               float: {
                 '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-15px)' },
+                '50%': { transform: 'translateY(-8px)' },
               },
-              heatPulse: {
-                '0%, 100%': { filter: 'brightness(1) drop-shadow(0 0 2px rgba(251, 191, 36, 0.4))', opacity: '1' },
-                '50%': { filter: 'brightness(1.3) drop-shadow(0 0 12px rgba(251, 191, 36, 0.8))', opacity: '0.9' },
+              glow: {
+                '0%, 100%': { filter: 'drop-shadow(0 0 5px rgba(79, 70, 229, 0.3))' },
+                '50%': { filter: 'drop-shadow(0 0 15px rgba(79, 70, 229, 0.5))' },
               }
             },
           },
@@ -64,7 +63,8 @@
     <style>
       body {
         font-family: 'Space Grotesk', 'Noto Sans Arabic', sans-serif;
-        -webkit-tap-highlight-color: transparent;
+        background-color: #f0f4ff;
+        color: #1e293b;
       }
       .font-display {
         font-family: 'Space Grotesk', 'Lexend', 'Noto Sans Arabic', sans-serif;
@@ -75,6 +75,15 @@
       .no-scrollbar {
         -ms-overflow-style: none;
         scrollbar-width: none;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
       }
       .safe-pb {
         padding-bottom: env(safe-area-inset-bottom);
@@ -91,7 +100,7 @@
 }
 </script>
 </head>
-  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-300">
+  <body class="bg-background text-slate-900 antialiased overflow-hidden">
     <div id="root"></div>
   </body>
 </html>

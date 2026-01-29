@@ -84,7 +84,6 @@ export const EvaporationSimulation: React.FC = () => {
 
       // Steam Logic (Enhanced for 100C+)
       if (temperature > 40 && waterLevel > 0) {
-        // Significantly higher intensity at 100+
         const baseIntensity = temperature >= 100 ? 0.8 : (temperature - 40) / 100;
         
         steamParticles.current.forEach(p => {
@@ -98,7 +97,7 @@ export const EvaporationSimulation: React.FC = () => {
           if (p.opacity > 0) {
             p.x += p.vx;
             p.y += p.vy;
-            p.opacity -= temperature >= 100 ? 0.003 : 0.005; // Steam lasts longer if very hot
+            p.opacity -= temperature >= 100 ? 0.003 : 0.005; 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
@@ -111,14 +110,11 @@ export const EvaporationSimulation: React.FC = () => {
     };
     raf = requestAnimationFrame(update);
 
-    // Realistic evaporation over time
     const interval = setInterval(() => {
       if (waterLevel > 0) {
         if (temperature >= 100) {
-          // Rapid evaporation at boiling point
           setWaterLevel(prev => Math.max(0, prev - 0.4));
         } else if (temperature > 60) {
-          // Slow evaporation
           setWaterLevel(prev => Math.max(0, prev - 0.05));
         }
       }
@@ -185,17 +181,18 @@ export const EvaporationSimulation: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 w-full max-w-[320px] bg-slate-900/90 backdrop-blur-3xl p-6 rounded-[2.5rem] border border-white/10 shadow-2xl space-y-4 mb-4">
+      {/* Temperature Control Panel - Now smaller and positioned higher */}
+      <div className="relative mt-[-30px] z-30 w-full max-w-[280px] bg-slate-900/90 backdrop-blur-2xl p-4 rounded-[2rem] border border-white/10 shadow-2xl space-y-3 mb-4">
         <div className="flex justify-between items-center">
           <div className="text-right">
-            <span className="text-[10px] font-black text-primary uppercase block tracking-widest mb-1">الحرارة</span>
-            <span className={`text-2xl font-black transition-all ${temperature >= 100 ? 'text-red-500 scale-110 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'text-white'}`}>
+            <span className="text-[9px] font-black text-primary uppercase block tracking-widest mb-0.5 opacity-70">الحرارة</span>
+            <span className={`text-xl font-black transition-all ${temperature >= 100 ? 'text-red-500 scale-105 drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]' : 'text-white'}`}>
               {temperature}°C
             </span>
           </div>
           <div className="text-left">
-            <span className="text-[10px] font-black text-blue-400 uppercase block tracking-widest mb-1">الحالة</span>
-            <span className={`text-sm font-black transition-colors ${temperature >= 100 ? 'text-red-400' : 'text-white'}`}>
+            <span className="text-[9px] font-black text-blue-400 uppercase block tracking-widest mb-0.5 opacity-70">الحالة</span>
+            <span className={`text-xs font-black transition-colors ${temperature >= 100 ? 'text-red-400' : 'text-white'}`}>
               {temperature >= 100 ? 'غليان مستمر' : temperature > 60 ? 'تبخر هادئ' : 'سكون'}
             </span>
           </div>
@@ -205,14 +202,19 @@ export const EvaporationSimulation: React.FC = () => {
           min="20" max="150" 
           value={temperature} 
           onChange={(e) => setTemperature(parseInt(e.target.value))} 
-          className="w-full h-2 bg-slate-800 rounded-full appearance-none accent-primary cursor-pointer" 
+          className="w-full h-1.5 bg-slate-800 rounded-full appearance-none accent-primary cursor-pointer" 
         />
-        <p className="text-[10px] font-bold text-slate-400 text-center leading-tight">
+        <p className="text-[9px] font-bold text-slate-400 text-center leading-tight">
           {temperature >= 100 
-            ? "عند وصول الحرارة لدرجة الغليان (100°م)، تتحول المادة السائلة إلى بخار بسرعة كبيرة وتظهر الفقاعات." 
-            : "ارفع درجة الحرارة للوصول إلى مرحلة الغليان ومشاهدة التبخر الكثيف."}
+            ? "عند وصول الحرارة لدرجة الغليان (100°م)، تتحول المادة السائلة إلى بخار بسرعة." 
+            : "ارفع درجة الحرارة للوصول إلى مرحلة الغليان."}
         </p>
-        <button onClick={() => setWaterLevel(100)} className="w-full py-2 bg-primary/20 text-primary rounded-xl text-[10px] font-black uppercase transition-all hover:bg-primary/30 border border-primary/20">إعادة ملء الوعاء</button>
+        <button 
+          onClick={() => setWaterLevel(100)} 
+          className="w-full py-1.5 bg-primary/20 text-primary rounded-xl text-[9px] font-black uppercase transition-all hover:bg-primary/30 border border-primary/20"
+        >
+          إعادة ملء الوعاء
+        </button>
       </div>
     </div>
   );
